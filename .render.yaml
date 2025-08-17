@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: payfast-ipn-listener
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
