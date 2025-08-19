@@ -9,18 +9,19 @@ app.use(bodyParser.json());
 
 // IPN route
 app.post('/notify', (req, res) => {
+  console.log('✅ POST /notify hit');
+
   const logEntry = {
     timestamp: new Date().toISOString(),
     data: req.body
   };
 
-  // Append the log to a local file
   fs.appendFile('notify.log', JSON.stringify(logEntry, null, 2) + ',\n', (err) => {
     if (err) {
-      console.error('Error writing to log:', err);
+      console.error('❌ Error writing to log:', err);
       return res.status(500).send('Failed');
     }
-    console.log('IPN received:', logEntry);
+    console.log('✅ IPN saved to notify.log');
     res.send('OK');
   });
 });
